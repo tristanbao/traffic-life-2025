@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        /* === VIEWPORT BASE === */
         html, body { height: 100%; overflow-x: hidden; margin: 0; padding: 0; }
         html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
         .slide { width: 100vw; height: 100vh; height: 100dvh; overflow: hidden; scroll-snap-align: start; display: flex; flex-direction: column; position: relative; }
@@ -28,7 +29,6 @@
         .stat-label { font-size: var(--small-size); color: var(--text-secondary); margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em; }
         .grid { display: grid; gap: clamp(0.8rem, 1.5vw, 1.5rem); }
         .grid-2 { grid-template-columns: repeat(2, 1fr); }
-        .grid-3 { grid-template-columns: repeat(3, 1fr); }
         ul { list-style: none; padding: 0; margin: 0; }
         li { padding-left: 1.5rem; position: relative; margin-bottom: 0.8rem; }
         li::before { content: '—'; position: absolute; left: 0; color: var(--accent-warm); }
@@ -44,7 +44,7 @@
         .nav-dots { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 100; }
         .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-subtle); transition: all 0.3s; }
         .nav-dot.active { background: var(--accent-warm); transform: scale(1.3); }
-        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
         .title-slide { text-align: center; }
         .title-slide h1 { margin-bottom: 1rem; }
         .title-slide .subtitle { font-size: var(--h3-size); color: var(--text-secondary); font-family: 'Cormorant', serif; font-style: italic; }
@@ -56,43 +56,10 @@
         .bar-label { position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: var(--small-size); white-space: nowrap; }
         .insight-box { background: linear-gradient(135deg, rgba(212,165,116,0.1) 0%, rgba(232,180,184,0.05) 100%); border-left: 3px solid var(--accent-warm); padding: 1rem 1.5rem; margin: 1rem 0; }
         .insight-box p { color: var(--text-primary); font-style: italic; }
-        
-        /* Map Styles */
-        .map-container { position: relative; width: 100%; max-width: 400px; margin: 0 auto; }
-        .zhejiang-map { width: 100%; height: auto; }
-        .city-dot { position: absolute; width: 16px; height: 16px; border-radius: 50%; transform: translate(-50%, -50%); cursor: pointer; transition: all 0.3s; }
-        .city-dot:hover { transform: translate(-50%, -50%) scale(1.3); }
-        .city-dot.hangzhou { top: 45%; left: 55%; background: var(--accent-warm); box-shadow: 0 0 20px var(--accent-warm); }
-        .city-dot.shaoxing { top: 48%; left: 50%; background: var(--accent-warm); box-shadow: 0 0 15px var(--accent-warm); }
-        .city-dot.jiaxing { top: 42%; left: 48%; background: var(--accent-gold); }
-        .city-dot.huzhou { top: 40%; left: 52%; background: var(--accent-gold); }
-        .city-dot.ningbo { top: 50%; left: 38%; background: var(--accent-pink); }
-        .city-dot.wenzhou { top: 70%; left: 45%; background: var(--accent-pink); }
-        .city-dot.jinhua { top: 58%; left: 50%; background: var(--text-secondary); }
-        .city-dot.quzhou { top: 65%; left: 62%; background: var(--text-secondary); }
-        .city-dot.lishui { top: 70%; left: 58%; background: var(--text-secondary); }
-        .city-dot.zhoushan { top: 55%; left: 25%; background: var(--text-secondary); }
-        
-        .city-label { position: absolute; font-size: 12px; color: var(--text-secondary); transform: translate(-50%, 0); white-space: nowrap; }
-        .city-label.hangzhou { top: 38%; left: 55%; color: var(--accent-warm); font-weight: bold; }
-        .city-label.shaoxing { top: 52%; left: 50%; color: var(--accent-warm); }
-        .city-label.jiaxing { top: 36%; left: 48%; }
-        .city-label.huzhou { top: 34%; left: 52%; }
-        .city-label.ningbo { top: 44%; left: 38%; color: var(--accent-pink); }
-        
-        .flow-line { position: absolute; height: 3px; background: linear-gradient(90deg, var(--accent-warm), var(--accent-pink)); transform-origin: left center; opacity: 0.6; }
-        
-        .legend { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
-        .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: var(--small-size); }
-        .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
     </style>
 </head>
 <body>
-    <div class="nav-dots">
-        <div class="nav-dot active"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div>
-    </div>
-
-    <!-- Slide 1: Cover -->
+    <div class="nav-dots"><div class="nav-dot active"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div><div class="nav-dot"></div></div>
     <section class="slide" id="slide-1">
         <div class="shape shape-1"></div><div class="shape shape-2"></div><div class="shape shape-3"></div>
         <div class="slide-content title-slide">
@@ -104,8 +71,6 @@
             <p style="font-size: var(--small-size);">基于高速公路车流数据 + 公共数据融合分析</p>
         </div>
     </section>
-
-    <!-- Slide 2: Overview -->
     <section class="slide" id="slide-2">
         <div class="shape shape-2"></div><div class="shape shape-3"></div>
         <div class="slide-content">
@@ -120,115 +85,57 @@
             </div>
         </div>
     </section>
-
-    <!-- Slide 3: Commute with Map -->
     <section class="slide" id="slide-3">
         <div class="shape shape-1"></div>
         <div class="slide-content">
             <div class="section-number">02</div>
             <h2>跨区域通勤 · 杭绍一体化</h2>
             <div class="accent-line"></div>
-            <div class="grid grid-2" style="margin-top: 1.5rem; gap: 2rem; align-items: center;">
+            <div class="grid grid-2" style="margin-top: 1.5rem; gap: 2rem;">
                 <div>
-                    <div class="map-container">
-                        <svg class="zhejiang-map" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M80,20 L120,15 L150,30 L170,50 L175,80 L165,110 L145,130 L120,145 L90,150 L60,140 L40,120 L35,90 L45,60 L60,35 Z" 
-                                  fill="none" stroke="var(--border-subtle)" stroke-width="1.5" opacity="0.6"/>
-                            <!-- Flow lines -->
-                            <line x1="110" y1="45" x2="95" y2="75" stroke="var(--accent-warm)" stroke-width="2" opacity="0.7">
-                                <animate attributeName="stroke-dasharray" values="0,20;20,0" dur="2s" repeatCount="indefinite"/>
-                            </line>
-                            <line x1="110" y1="45" x2="70" y2="60" stroke="var(--accent-warm)" stroke-width="2" opacity="0.5"/>
-                            <line x1="110" y1="45" x2="85" y2="50" stroke="var(--accent-warm)" stroke-width="2" opacity="0.4"/>
-                            <!-- Cities -->
-                            <circle cx="110" cy="45" r="6" fill="var(--accent-warm)"><title>杭州</title></circle>
-                            <circle cx="95" cy="75" r="5" fill="var(--accent-warm)"><title>绍兴</title></circle>
-                            <circle cx="70" cy="60" r="4" fill="var(--accent-gold)"><title>嘉兴</title></circle>
-                            <circle cx="85" cy="50" r="4" fill="var(--accent-gold)"><title>湖州</title></circle>
-                            <circle cx="55" cy="70" r="4" fill="var(--accent-pink)"><title>宁波</title></circle>
-                            <circle cx="65" cy="115" r="3" fill="var(--text-secondary)"><title>金华</title></circle>
-                            <circle cx="120" cy="95" r="3" fill="var(--text-secondary)"><title>衢州</title></circle>
-                        </svg>
-                        <div class="city-label hangzhou">杭州</div>
-                        <div class="city-label shaoxing">绍兴</div>
-                        <div class="city-label jiaxing">嘉兴</div>
-                        <div class="city-label huzhou">湖州</div>
-                        <div class="city-label ningbo">宁波</div>
-                    </div>
-                    <div class="legend">
-                        <div class="legend-item"><div class="legend-dot" style="background: var(--accent-warm);"></div>高流量</div>
-                        <div class="legend-item"><div class="legend-dot" style="background: var(--accent-gold);"></div>中流量</div>
-                        <div class="legend-item"><div class="legend-dot" style="background: var(--text-secondary);"></div>低流量</div>
-                    </div>
+                    <div class="card stat-card"><div class="stat-number">97.5万</div><div class="stat-label">杭绍通勤流量（辆次/年）</div></div>
+                    <p style="margin-top: 1rem; text-align: center;">浙江省最高，占全省<span class="highlight">50%+</span></p>
+                    <div class="insight-box" style="margin-top: 1.5rem;"><p>"大量居民在杭州就业、绍兴居住，形成高频次、高密度的'钟摆式'通勤。"</p></div>
                 </div>
                 <div>
-                    <div class="card stat-card">
-                        <div class="stat-number">97.5万</div>
-                        <div class="stat-label">杭绍通勤流量（辆次/年）</div>
+                    <h3 style="margin-bottom: 1rem;">通勤车辆规模 TOP5</h3>
+                    <div class="bar-chart">
+                        <div class="bar" style="height: 100%;"><span class="bar-label">杭绍</span></div>
+                        <div class="bar" style="height: 70%;"><span class="bar-label">杭嘉</span></div>
+                        <div class="bar" style="height: 55%;"><span class="bar-label">杭湖</span></div>
+                        <div class="bar" style="height: 35%;"><span class="bar-label">杭甬</span></div>
+                        <div class="bar" style="height: 25%;"><span class="bar-label">甬舟</span></div>
                     </div>
-                    <p style="margin-top: 1rem; text-align: center;">浙江省最高，占全省<span class="highlight">50%+</span></p>
-                    <div class="insight-box" style="margin-top: 1rem;">
-                        <p>"大量居民在杭州就业、绍兴居住，形成高频次、高密度的'钟摆式'通勤。"</p>
-                    </div>
+                    <p style="text-align: center; margin-top: 1rem; font-size: var(--small-size);">燃油车占比<span class="highlight">75%+</span>，新能源车仅24%</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Slide 4: Extreme Commute with Map -->
     <section class="slide" id="slide-4">
         <div class="shape shape-2"></div><div class="shape shape-3"></div>
         <div class="slide-content">
             <div class="section-number">03</div>
             <h2>极端通勤分析</h2>
             <div class="accent-line"></div>
-            <div class="grid grid-2" style="margin-top: 1.5rem; gap: 2rem; align-items: center;">
+            <div class="grid grid-2" style="margin-top: 1.5rem;">
                 <div>
-                    <div class="map-container">
-                        <svg class="zhejiang-map" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M80,20 L120,15 L150,30 L170,50 L175,80 L165,110 L145,130 L120,145 L90,150 L60,140 L40,120 L35,90 L45,60 L60,35 Z" 
-                                  fill="none" stroke="var(--border-subtle)" stroke-width="1.5" opacity="0.6"/>
-                            <!-- Warning lines -->
-                            <line x1="95" y1="75" x2="65" y2="110" stroke="#ff4444" stroke-width="3" opacity="0.8">
-                                <animate attributeName="stroke-dasharray" values="0,15;15,0" dur="1.5s" repeatCount="indefinite"/>
-                            </line>
-                            <line x1="70" y1="60" x2="120" y2="95" stroke="#ff6666" stroke-width="2" opacity="0.5"/>
-                            <!-- Cities -->
-                            <circle cx="95" cy="75" r="7" fill="#ff4444"><title>绍兴-温州极端通勤最高</title></circle>
-                            <circle cx="70" cy="60" r="5" fill="#ff6666"><title>嘉兴-衢州</title></circle>
-                            <circle cx="65" cy="110" r="4" fill="#ff8888"><title>丽水-宁波</title></circle>
-                            <circle cx="120" cy="95" r="4" fill="#ff8888"><title>湖州-衢州</title></circle>
-                            <circle cx="110" cy="45" r="3" fill="var(--text-secondary)"><title>杭州</title></circle>
-                        </svg>
-                        <div class="city-label hangzhou" style="top: 38%;">杭州</div>
-                        <div class="city-label shaoxing" style="top: 52%; left: 52%; color: #ff4444;">绍兴</div>
-                        <div class="city-label jiaxing" style="top: 36%; color: #ff6666;">嘉兴</div>
-                    </div>
-                    <div class="legend">
-                        <div class="legend-item"><div class="legend-dot" style="background: #ff4444;"></div>高(>2%)</div>
-                        <div class="legend-item"><div class="legend-dot" style="background: #ff6666;"></div>中(0.3-1%)</div>
-                        <div class="legend-item"><div class="legend-dot" style="background: #ff8888;"></div>低(<0.3%)</div>
-                    </div>
+                    <div class="card stat-card"><div class="stat-number">0.04%</div><div class="stat-label">浙江省极端通勤占比</div></div>
+                    <p style="margin-top: 1rem; text-align: center;">整体通勤压力<span class="highlight">较小</span></p>
+                    <div class="insight-box" style="margin-top: 1.5rem;"><p>"极端通勤以零星发生的事件驱动为主，与产业分布、路网密度等<span class="highlight">结构性因素无关</span>"</p></div>
                 </div>
                 <div>
-                    <div class="card stat-card">
-                        <div class="stat-number">0.04%</div>
-                        <div class="stat-label">浙江省极端通勤占比</div>
-                    </div>
-                    <p style="margin-top: 1rem; text-align: center;">整体通勤压力<span class="highlight">较小</span></p>
-                    <div class="insight-box" style="margin-top: 1rem;">
-                        <p>"极端通勤以零星发生的事件驱动为主，与产业分布、路网密度等<span class="highlight">结构性因素无关</span>"</p>
-                    </div>
+                    <h3>极端通勤高发路段</h3>
                     <ul style="margin-top: 1rem;">
                         <li><span class="highlight">绍兴 ↔ 温州</span> — 2.22%（全省最高）</li>
-                        <li>嘉兴 ↔ 衢州 — 1.45%</li>
+                        <li>嘉兴 ↔ 衢州 — 1.45%（需绕行杭州）</li>
+                        <li>丽水 ↔ 宁波 — 0.36%</li>
+                        <li>湖州 ↔ 衢州 — 0.30%</li>
                     </ul>
+                    <div class="insight-box" style="margin-top: 1rem; border-color: var(--accent-pink);"><p style="color: var(--accent-pink);">"浙南—浙北、浙西—浙东跨区域走廊为极端通勤高发区"</p></div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Slide 5: Logistics -->
     <section class="slide" id="slide-5">
         <div class="shape shape-1"></div>
         <div class="slide-content">
@@ -259,8 +166,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Slide 6: Green Travel -->
     <section class="slide" id="slide-6">
         <div class="shape shape-2"></div><div class="shape shape-3"></div>
         <div class="slide-content">
@@ -283,20 +188,13 @@
                     <p style="text-align: center; margin-top: 1rem;">全省均值 <span class="highlight">27%</span></p>
                 </div>
                 <div>
-                    <div class="card stat-card">
-                        <div class="stat-number">34.83%</div>
-                        <div class="stat-label">杭州市渗透率 · 全省第一</div>
-                    </div>
-                    <div class="insight-box" style="margin-top: 1.5rem;">
-                        <p>"杭州领跑全省，得益于<span class="highlight">充电基础设施完善</span>、<span class="highlight">政策激励</span>和<span class="highlight">产业聚集</span>综合优势"</p>
-                    </div>
+                    <div class="card stat-card"><div class="stat-number">34.83%</div><div class="stat-label">杭州市渗透率 · 全省第一</div></div>
+                    <div class="insight-box" style="margin-top: 1.5rem;"><p>"杭州领跑全省，得益于<span class="highlight">充电基础设施完善</span>、<span class="highlight">政策激励</span>和<span class="highlight">产业聚集</span>综合优势"</p></div>
                     <p style="margin-top: 1rem; font-size: var(--small-size);">山区/海岛偏低：衢州23%、丽水21%、舟山21%</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Slide 7: Road Network -->
     <section class="slide" id="slide-7">
         <div class="shape shape-1"></div>
         <div class="slide-content">
@@ -327,8 +225,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Slide 8: Summary -->
     <section class="slide" id="slide-8">
         <div class="shape shape-2"></div><div class="shape shape-3"></div>
         <div class="slide-content title-slide">
@@ -342,7 +238,6 @@
             <p style="margin-top: 2rem; font-size: var(--small-size); color: var(--text-secondary);">数据来源：浙江省高速公路通行数据 + 公共数据授权运营</p>
         </div>
     </section>
-
     <script>
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.nav-dot');
